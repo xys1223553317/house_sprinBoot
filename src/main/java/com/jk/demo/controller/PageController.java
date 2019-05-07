@@ -22,4 +22,9 @@ public class PageController {
     public String toLogin(){
         return "login";
     }
+
+    @RequestMapping("phoneLogin")
+    public String phoneLogin(){
+        return "phonelogin";
+    }
 }
