@@ -11,4 +11,6 @@ public interface TreeService1 {
     List<NavBean> queryNav();
 
     HashMap<String,Object> LoginUser(LoginBean loginBean);
+
+    HashMap<String, Object> noteLogin(String code, String account);
 }

@@ -58,14 +58,15 @@
                     请登录</h2>
             </div>
             <div class="col-lg-10">
-                <input type="text" class="form-control" name="account" placeholder="请输入账户名" required
+                <input type="text" class="form-control" name="account" placeholder="请输入手机号" required
                        autofocus />
             </div>
             <div class="col-lg-10">
             </div>
             <div class="col-lg-10">
-                <input type="password" class="form-control" name="password" placeholder="请输入密码" required
+                <input type="password" class="form-control" id="code" placeholder="请输入验证码" required
                        autofocus />
+                <button type="button" onclick="sendCode()" class="btn btn-success col-lg-12">发送验证码</button>
             </div>
             <div class="col-lg-10">
             </div>
@@ -86,21 +87,35 @@
 <script type="text/javascript">
 
         $('#btn').click(function () {
+            var code=$("#code").val();
+            var account=$("#account").val();
+
             $.ajax({
-                url:"/tree/login",
+                url:"/tree/noteLogin",
                 type:"post",
-                data:$("#from").serialize(),
+                data:
+                    {
+                        code:code,
+                        account:account
+                    },
                 success:function(data){
                     location.href="/page/show"
                 }
             })
         });
+        function sendCode(){
+        var code=$("#code").val();
+            $.ajax({
+                url:"/tree/sendCode",
+                type:"post",
+                data:{code:code},
+                success:function(data){
 
+                      var  msg= data.msg
+                         alert(msg);
 
-    $('#phonebtn').click(function () {
-       alert(12)
-        location="/page/phoneLogin"
-    })
-
+                }
+            })
+        }
 </script>
 </html>
