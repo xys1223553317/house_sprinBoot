@@ -12,4 +12,16 @@ public class PageController {
     public String test(){
         return "test";
     }
+    @RequestMapping("totenant")
+    public String totenant(){
+        return "tenantlist";
+    }
+    @RequestMapping("tolandlord")
+    public String tolandlord(){
+        return "landlord";
+    }
+    @RequestMapping("opentenant")
+    public String opentenant(){
+        return "opentenant";
+    }
 }

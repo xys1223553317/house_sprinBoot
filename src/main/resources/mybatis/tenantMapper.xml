@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.demo.dao.TenantDao">
+<select id="findtenantcount" parameterType="com.jk.demo.bean.TenantBean" resultType="int">
+     select count(1) from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+</select>
+<select id="findtenantlist" parameterType="com.jk.demo.bean.TenantBean" resultType="com.jk.demo.bean.TenantBean">
+      select t2.name,t2.fhao,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+      LIMIT #{start},#{rows}
+</select>
+<select id="findlandlordcount" parameterType="com.jk.demo.bean.LandlordBean" resultType="int">
+     select count(1) from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+</select>
+<select id="findlandlordlist" parameterType="com.jk.demo.bean.LandlordBean" resultType="com.jk.demo.bean.LandlordBean">
+select t1.name,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+LIMIT #{start},#{rows}
+</select>
+</mapper>
