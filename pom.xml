@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jk</groupId>
-    <artifactId>ssh-task2-xys</artifactId>
+    <artifactId>Houser_for_rent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Houser_for_rent</name>
     <description>Demo project for Spring Boot</description>
@@ -24,12 +24,21 @@
     <dependencies>
         <dependency>
             <groupId>com.jk</groupId>
-            <artifactId>dome</artifactId>
+            <artifactId>Houser_for_rent</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>io.dubbo.springboot</groupId>
+            <artifactId>spring-boot-starter-dubbo</artifactId>
+            <version>1.0.0</version>
+        </dependency>
 
-
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -48,6 +57,7 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.51</version>
         </dependency>
+
         <!-- aliyun -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>

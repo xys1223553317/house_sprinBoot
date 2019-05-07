@@ -2,19 +2,20 @@ spring:
   datasource:
     name: mysql
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://192.168.149.1:3306/1809
+    url: jdbc:mysql://192.168.1.137:3306/1810
     username: root
-    password: root
+    password: 2001
     driver-class-name: com.mysql.jdbc.Driver
     application:
        name: serviceconsumer
+
 
   dubbo:
     application:
       name: login_consumer
     registry:
-      address: zookeeper://127.0.0.1:2181
-    scan: com.jk.xys.service
+      address: zookeeper://192.168.1.115:2181
+    scan: com.jk.demo.service
 
 
 

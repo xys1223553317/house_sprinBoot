@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/jquery-1.9.1.min.js"></script>
+    <script src="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script src="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <title>Insert title here</title>
+
+
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="">金科</a>
+
+        </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div id="myTree"></div>
+        </div>
+        <div class="col-md-10">
+            <div id="mytabs">
+                <ul class="nav nav-tabs" id="tablist">
+                    <li role="presentation" class="active">
+
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="home">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function(){
+        initTree();
+    })
+    //初始化树
+    function initTree(){
+        $.ajax({
+            url:"/tree/queryNav",
+            data:{},
+            dataType:"json",
+            success:function(data){
+
+                $('#myTree').treeview({
+                    data:data,
+                    onNodeSelected:function(event, node) {
+                        $.addtabs({iframeHeight: 650});
+                        if (node.seletetable) {
+                            $.addtabs.add({
+                                id:node.id,
+                                title:node.text,
+                                url:node.href,
+                            });
+                        }
+
+                    }
+
+                })
+
+
+
+
+
+
+
+
+
+            }
+        })
+    }
+
+</script>
+</html>

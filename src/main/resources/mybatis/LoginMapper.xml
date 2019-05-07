@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.demo.dao.LoginDao">
+
+    <select id="LoginUser"  resultType="com.jk.demo.pojo.LoginBean">
+        select * from t_login where account=#{account} and password=#{password}
+    </select>
+
+</mapper>
