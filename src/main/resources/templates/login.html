@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="/bootstrap/jquery-1.9.1.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+    <script src="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-treeview/bootstrap-treeview.min.css">
+    <link rel="stylesheet" href="/bootstrap/bootStrap-addTabs/bootstrap.addtabs.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+</head>
+<style>
+    #from
+    {
+        background-color: #96b97d;
+    }
+    .mycenter
+    {
+        margin-top: auto;
+        margin-left: auto;
+        margin-right: auto;
+        height: 350px;
+        width: 500px;
+        padding: 5%;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .mycenter mysign
+    {
+        width: 440px;
+    }
+    .mycenter input, checkbox, button
+    {
+        margin-top: 2%;
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+    .mycheckbox
+    {
+        margin-top: 10px;
+        margin-left: 40px;
+        margin-bottom: 10px;
+        height: 10px;
+    }
+</style>
+<body>
+<form id="from">
+    <div class="mycenter">
+        <div class="mysign">
+            <div class="col-lg-11 text-center text-info">
+                <h2>
+                    请登录</h2>
+            </div>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="account" placeholder="请输入账户名" required
+                       autofocus />
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="password" placeholder="请输入密码" required
+                       autofocus />
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10 mycheckbox checkbox">
+                <input type="checkbox" class="col-lg-1">记住密码</input>
+            </div>
+            <div class="col-lg-10">
+            </div>
+            <div class="col-lg-10">
+                <button type="button" id="btn" class="btn btn-success col-lg-12">登录</button>
+                <button type="button" id="phonebtn" class="btn btn-success col-lg-12">手机登录</button>
+                <button type="button" id="mailbtn" class="btn btn-success col-lg-12">邮箱登录</button>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('#btn').click(function () {
+            $.ajax({
+                url:"/tree/login",
+                type:"post",
+                data:$("#from").serialize(),
+                success:function(data){
+                    location.href="/page/show"
+                }
+            })
+           /* window.location.href = "main.aspx";*/
+        });
+    });
+   /* function noteLogin(){
+
+        location="/page/noteLogin";
+    }
+    function createUser() {
+        location="/page/register"
+    }*/
+</script>
+</html>

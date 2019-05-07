@@ -17,4 +17,9 @@ public class PageController {
     public String show(){
         return "show";
     }
+
+    @RequestMapping("toLogin")
+    public String toLogin(){
+        return "login";
+    }
 }
