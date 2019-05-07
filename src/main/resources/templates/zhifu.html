@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+</head>
+<body>
+
+
+
+<form id="ff">
+    <input type="hidden" th:value="${c?.pid}" name="pid">
+    <table border="0" cellpadding="10" >
+        <tr>
+            <td>职位名称</td>
+            <td cols="3"><input  type="text"  th:value="${c?.pname}" id="name"  name = "pname"  placeholder="请输入职位名称" style="width:100px" >
+                <span id="span"></span>
+            </td>
+
+        </tr>
+        <tr>
+            <td>职位范围</td>
+            <td cols="3">   插件管理</td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">添加插件</td>
+            <td><input type="checkbox">删除插件</td>
+            <td cols="2">  </td>
+
+        </tr>
+        <tr>
+            <td></td>
+            <td cols="3">   人员管理</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">账号配置</td>
+            <td><input type="checkbox">权限配置</td>
+            <td cols="2">  </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td cols="3">   财务管理</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">代收账单</td>
+            <td><input type="checkbox">待支账单</td>
+            <td cols="2"> <input type="checkbox"><input type="checkbox">收支流水</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td cols="3">  合同管理</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">租客合同</td>
+            <td><input type="checkbox">房东合同</td>
+            <td cols="2"> </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td cols="3">  企业配置</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">数据导入</td>
+            <td><input type="checkbox">选项配置</td>
+            <td cols="2"> </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td cols="3">  手机端</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">待租房源</td>
+            <td><input type="checkbox">房源管理</td>
+            <td><input type="checkbox">催收提醒</td>
+            <td cols="2"> <input type="checkbox">新增房源</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="checkbox">到期提醒</td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <center><button   type="button" class="btn btn-SUCCESS" onclick="add()">确定添加权限</button></center>
+</form>
+
+</body>
+
+</html>
