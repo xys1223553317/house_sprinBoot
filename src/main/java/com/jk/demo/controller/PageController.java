@@ -8,23 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("page")
 public class PageController {
     @RequestMapping("test")
-
+    @ResponseBody
     public String test(){
-
         return "test";
-    }
-    @RequestMapping("show")
-    public String show(){
-        return "show";
-    }
-
-    @RequestMapping("toLogin")
-    public String toLogin(){
-        return "login";
-    }
-
-    @RequestMapping("phoneLogin")
-    public String phoneLogin(){
-        return "phonelogin";
     }
 }
