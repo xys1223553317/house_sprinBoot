@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.demo.dao.UserDao">
+    <select id="findUserPage" resultType="com.jk.demo.pojo.UserBean" parameterType="map">
+      select id,name,account,phone,job,createTime from t_user
+        limit #{start},#{rows}
+    </select>
+
+    <delete id="delUser" parameterType="int">
+        delete from t_user where id in
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="findUserById" parameterType="int" resultType="com.jk.demo.pojo.UserBean">
+            select id,name,account,phone,createTime,job
+               from t_user  where id=#{value}
+    </select>
+    <!-- 新增用户信息 -->
+    <insert id="saveUser" parameterType="com.jk.demo.pojo.UserBean" useGeneratedKeys="true" keyProperty="id">
+		insert into t_user (name,password,phone,job)
+		values (#{name},#{password},#{phone},#{job});
+	</insert>
+
+    <update id="updateUser"  >
+		update t_user  set name=#{userBean.name},account=#{userBean.account},phone=#{userBean.phone},createTime=#{userBean.createTime},job=#{userBean.job}
+		where id=#{id}
+	</update>
+
+
+
+    <!--职位分页查询-->
+    <insert id="addzhiwei">
+
+         insert into  t_job (pname) values( #{pname} )
+
+    </insert>
+    <update id="updatezhiwei">
+        update  t_job  set  pname=#{pname} where pid=#{pid}
+    </update>
+</mapper>

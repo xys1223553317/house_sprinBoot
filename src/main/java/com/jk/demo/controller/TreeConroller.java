@@ -35,8 +35,8 @@ public class TreeConroller {
     }
     @RequestMapping("sendCode")
     @ResponseBody
-    public HashMap<String,Object> sendCode(String code, HttpSession session){
-        return treeServcie.sendCode(code,session);
+    public HashMap<String,Object> sendCode( HttpSession session,String account){
+        return treeServcie.sendCode(session,account);
     }
     @RequestMapping("noteLogin")
     @ResponseBody

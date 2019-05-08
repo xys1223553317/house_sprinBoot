@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .myrow{
+            margin-bottom:10px
+        }
+    </style>
+</head>
+<body>
+<form id="userFrom">
+    <div class="row myrow">
+        <div class="col-md-2">
+            <label for="name">使用名</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="name" name="name" maxlength="8" placeholder="请输入使用名">
+        </div>
+        <div class="col-md-2">
+            <label for="password">密码</label>
+        </div>
+        <div class="col-md-4">
+            <input type="password" class="form-control" id="password" name="password"  maxlength="18" placeholder="请输入密码">
+        </div>
+    </div>
+    <div class="row myrow">
+        <div class="col-md-2">
+            <label for="phone">手机号</label>
+        </div>
+        <div class="col-md-4">
+            <input type="text" class="form-control" id="phone" name="phone" placeholder="请输入手机号" min="0">
+            <span class="help-block">手机号只能是数字</span>
+        </div>
+
+
+        <div class="col-md-2">
+            <label for="job">职位</label>
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" id="job" name="job">
+                <option>董事</option>
+                <option>经理</option>
+                <option>管家</option>
+
+            </select>
+        </div>
+    </div>
+
+
+
+
+
+</form>
+</body>
+
+</html>

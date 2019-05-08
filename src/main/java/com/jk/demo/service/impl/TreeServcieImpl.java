@@ -20,9 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -46,11 +44,18 @@ public class TreeServcieImpl implements TreeServcie {
     }
 
     @Override
-    public HashMap<String, Object> sendCode(String code ,HttpSession session) {
+    public HashMap<String, Object> sendCode(HttpSession session,String account) {
         HashMap<String, Object> result = new HashMap<>();
         HashMap<String, Object> params = new HashMap<>();
-        Date date = new Date();
-        System.out.println(date);
+      /*  redisTemplate.opsForValue().set(ConstanConf.Time,account+UUID.randomUUID().toString(),1,TimeUnit.DAYS);
+        Object days =  redisTemplate.opsForValue().get(ConstanConf.Time);
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(days);
+        if (objects.size()>3){
+            result.put("code", 3);
+            result.put("msg","请在明天发送");
+            return result;
+        }*/
         Object object = redisTemplate.opsForValue().get(ConstanConf.SMS_LOHIN_CODE+"sss");
         if (object!=null) {
             result.put("code", 2);
@@ -58,7 +63,7 @@ public class TreeServcieImpl implements TreeServcie {
             return result;
         }
         params.put("accountSid",ConstanConf.ACCOUNTSID);
-        params.put("to",code);
+        params.put("to",account);
         String timestamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
        params.put("timestamp", timestamp);
         String sig = Md5Util.getMd532(ConstanConf.ACCOUNTSID+ConstanConf.AUTH_TOKEN+timestamp);

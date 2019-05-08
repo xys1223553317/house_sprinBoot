@@ -58,7 +58,7 @@
                     请登录</h2>
             </div>
             <div class="col-lg-10">
-                <input type="text" class="form-control" name="account" placeholder="请输入手机号" required
+                <input type="text" class="form-control" name="account" id="account" placeholder="请输入手机号" required
                        autofocus />
             </div>
             <div class="col-lg-10">
@@ -105,10 +105,13 @@
         });
         function sendCode(){
         var code=$("#code").val();
+        var account=$("#account").val();
             $.ajax({
                 url:"/tree/sendCode",
                 type:"post",
-                data:{code:code},
+                data:{
+                    account:account
+                },
                 success:function(data){
 
                       var  msg= data.msg

@@ -69,4 +69,32 @@ public class PageController {
         model.addAttribute("id",id);
         return "querenshoukuan";
     }
+
+    @RequestMapping("findUserList")
+    public String findUserList(){
+        return "goodslist";
+    }
+
+    @RequestMapping("toUpdateUser")
+    public String toUpdateUser() {
+        return "updateUser";
+
+    }
+
+    @RequestMapping("toAddUser")
+    public String toAddUser() {
+        return "addUser";
+
+    }
+
+
+    @RequestMapping("findList")
+    public String findList(){
+        return "jobList";
+    }
+
+    @RequestMapping("zhifu")
+    public String  zhifu(){
+        return "zhifu";
+    }
 }

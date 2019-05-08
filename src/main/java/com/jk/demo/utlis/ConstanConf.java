@@ -37,6 +37,7 @@ public static final String SMS_LOHIN_Lock="lock";
 public static final String USER_NAV_LIST="userNav";
 public static final String USER_LEFTNAV_LIST="xys";
 public static final String AREA="area";
+public static final String Time="guoqi";
 
 
 }
