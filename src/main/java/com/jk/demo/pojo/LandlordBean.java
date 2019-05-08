@@ -25,4 +25,14 @@ public class LandlordBean {
     private Integer fymji;
     private String fyhxing;
     private String fyzk;
+    private Integer rent;
+    private Integer cash;
+    private Integer zxvacancy;
+    private Integer rentholiday;
+    private String fzzhifu;
+    private Integer sbiaonumber;
+    private Integer dbiaonumber;
+    private Integer qbiaonumber;
+    private String propertyfee;
+    private String contractway;
 }

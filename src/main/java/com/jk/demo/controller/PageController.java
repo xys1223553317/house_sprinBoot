@@ -28,4 +28,8 @@ public class PageController {
     public String openlandlord(){
         return "openlandlord";
     }
+    @RequestMapping("addlandlord")
+    public String addlandlord(){
+        return "addlandlord";
+    }
 }

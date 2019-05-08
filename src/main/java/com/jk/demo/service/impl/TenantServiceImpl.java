@@ -45,4 +45,14 @@ public class TenantServiceImpl implements TenantService {
     public LandlordBean cklandlord(Integer id) {
         return tenantDao.cklandlord(id);
     }
+
+    @Override
+    public LandlordBean huixianlandlord(Integer id) {
+        return tenantDao.huixianlandlord(id);
+    }
+
+    @Override
+    public boolean updatelandlordlist(LandlordBean landlordBean) {
+        return tenantDao.updatelandlordlist(landlordBean);
+    }
 }
