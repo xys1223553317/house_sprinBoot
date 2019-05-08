@@ -24,16 +24,15 @@
 
 <body>
 <div class="container-fluid">
-    <form id="ShoukForm" class="form-horizontal">
+    <form id="SzlsForm" class="form-horizontal">
         <div class="form-group">
-            <label for="fhao" class="col-sm-2 control-label">账单房号</label>
-            <div class="col-sm-4">
-                <span id="fhao"></span>
+            <label  class="col-sm-2 control-label">账单信息</label>
+        </div>
 
-            </div>
-            <label for="fkname" class="col-sm-2 control-label">付款方</label>
+        <div class="form-group">
+            <label for="url" class="col-sm-2 control-label">账单所属</label>
             <div class="col-sm-4">
-                <span id="fkname"></span>
+                <span id="url"></span>
             </div>
         </div>
 
@@ -43,12 +42,25 @@
                 <span id="zdmoney"></span>
             </div>
 
-            <label for="zdtype" class="col-sm-2 control-label">账单金额</label>
+            <label for="name" class="col-sm-2 control-label">付款/收款方</label>
             <div class="col-sm-4">
-                <span id="zdtype"></span>
+                <span id="name"></span>
             </div>
 
         </div>
+
+        <div class="form-group">
+            <label for="sfmoney" class="col-sm-2 control-label">实付金额</label>
+            <div class="col-sm-4">
+                <span id="sfmoney"></span>
+            </div>
+
+            <label for="zdtype" class="col-sm-2 control-label">账单类型</label>
+            <div class="col-sm-4">
+                <span id="zdtype"></span>
+            </div>
+        </div>
+
         <div class="form-group">
             <label for="zdTimelong" class="col-sm-2 control-label">账单时效</label>
             <div class="col-sm-4">
@@ -56,9 +68,36 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="daokuantime" class="col-sm-2 control-label">预计付款时间</label>
+        <label for="daokuantime" class="col-sm-2 control-label">预计付款时间</label>
+        <div class="col-sm-10">
+            <span id="daokuantime"></span>
+        </div>
+        </div>
+
+        <div class="divider"></div>
+        <hr class="simple" color="#6f5499" />
+
+        <div class="form-group">
+            <label  class="col-sm-2 control-label">支付信息</label>
+        </div>
+        <div class="form-group">
+            <label for="zftype" class="col-sm-2 control-label">支付方式</label>
+            <div class="col-sm-4">
+                <span id="zftype"></span>
+            </div>
+            <label for="querenTime" class="col-sm-2 control-label">确认时间</label>
+            <div class="col-sm-4">
+                <span id="querenTime"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="zfTime" class="col-sm-2 control-label">支付时间</label>
+            <span id="zfTime"></span>
+        </div>
+        <div class="form-group">
+            <label for="beizhu" class="col-sm-2 control-label">备注</label>
             <div class="col-sm-10">
-                <span id="daokuantime"></span>
+                <span id="beizhu"></span>
             </div>
         </div>
     </form>

@@ -23,4 +23,6 @@ public interface MoneyService {
    List<ZfType> findzftype();
 
     List<ZdType> findzdtype();
+
+    HashMap<String, Object> queryliushuiById(Integer id);
 }

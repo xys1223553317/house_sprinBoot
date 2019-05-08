@@ -81,11 +81,105 @@
                 {field:'zdname',title:'账单类型'},
                 {field:'starttime',title:'预计付款时间'},
                 {field:'111',title:'操作',formatter:function(value,row,index){
-                        return "<a href= javascript:queryById('"+row.id+"');>确定付款</a>||<a href= javascript:deleteById('"+row.id+"');>更多</a>"
+                        return "<a href= javascript:openfukuan('"+row.id+"');>确定付款</a>||<a href= javascript:queryzhangdan('"+row.id+"');>更多</a>"
                     }}
             ]
         })
     }
 
+
+    function openfukuan(id){
+        var url='/page/toquerenshoukuan?id='+id;
+        bootbox.dialog({
+            title: '确认收款',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "保存",
+                    className: 'btn-info',
+                    callback: function(){
+                        $.ajax({
+                            url:'/house/insertHouse',
+                            type:'post',
+                            data:$("#FWForm").serialize(),
+                            dataType:'json',
+                            success:function(data){
+                                if(data){
+                                    location.href.reload();
+                                }else{
+                                    alert("修改失败")
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    }
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+    //更多
+    function queryzhangdan(id){
+        //打开更多弹框
+        gengduo(id);
+        $.ajax({
+            url:'/money/queryshouzhangById',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#fhao").html(data.url);
+                $("#fkname").html(data.name);
+                $("#zdmoney").html(data.money);
+                $("#zdtype").html(data.zdname);
+                $("#zdTimelong").html(data.starttime+"至"+data.endtime);
+                $("#daokuantime").html(data.starttime);
+            }
+        })
+    }
+
+    function gengduo(id){
+        var url='/page/togengduo';
+        bootbox.dialog({
+            title: '更多信息',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "确认收款",
+                    className: 'btn-info',
+                    callback: function(){
+                        openfukuan(id);
+                    }
+                }
+            }
+        });
+    }
 </script>
 </html>

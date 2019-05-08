@@ -23,6 +23,7 @@ public class Tenant {
 
     private  Integer zjtype;//资金类型
     private  String zjname;
+
     private  Integer zftype;//支付类型
     private  String zfname;
 

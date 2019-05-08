@@ -37,6 +37,11 @@ public class MoneyServiceImpl implements MoneyService {
         return moneyDao.queryshouzhangById(id);
     }
 
+    @Override
+    public HashMap<String, Object> queryliushuiById(Integer id) {
+        return moneyDao.queryliushuiById(id);
+    }
+
    @Override
     public void addshouzhiliushui(Tenant tenant) {
         moneyDao.addshouzhiliushui(tenant);
@@ -56,5 +61,7 @@ public class MoneyServiceImpl implements MoneyService {
     public List<ZdType> findzdtype() {
         return moneyDao.findzdtype();
     }
+
+
 
 }

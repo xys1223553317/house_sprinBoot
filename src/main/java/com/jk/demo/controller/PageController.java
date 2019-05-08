@@ -21,9 +21,15 @@ public class PageController {
         return "daizhi";
     }
 
+    //代收更多
     @RequestMapping("togengduo")
     public String togengduo(){
         return "gengduo";
+    }
+    //流水更多
+    @RequestMapping("toliushuigengduo")
+    public String toliushuigengduo(){
+        return "liushuigengduo";
     }
     @RequestMapping("shouzhiliushui")
     public String shouzhiliushui(){

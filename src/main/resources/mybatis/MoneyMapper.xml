@@ -8,7 +8,7 @@
     </select>
 
     <select id="queryshouzhang" resultType="com.jk.demo.pojo.Tenant">
-        select t.*, zt.name as zdname,zk.name as zkname,zk.fhao as fhname from  t_tenant t
+        select t.*, zt.name as zdname,zk.name as zkname,zf.name as zfname,zk.fhao as fhname from  t_tenant t
        LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
        LEFT JOIN t_zftype zf ON  t.zftype =zf.id
        LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id

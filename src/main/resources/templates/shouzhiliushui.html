@@ -94,41 +94,38 @@
         //打开更多弹框
         gengduo(id);
         $.ajax({
-            url:'/money/queryshouzhangById',
+            url:'/money/queryliushuiById',
             data:{
                 id:id
             },
             dataType:'json',
             success:function(data){
-                $("#fhao").html(data.url);
-                $("#fkname").html(data.zkname);
+                $("#url").html(data.url);
                 $("#zdmoney").html(data.money);
+                $("#name").html(data.name);
+                $("#sfmoney").html(data.sfmoney);
                 $("#zdtype").html(data.zdname);
                 $("#zdTimelong").html(data.starttime+"至"+data.endtime);
-                $("#daokuantime").html(data.starttime);
+                $("#zftype").html(data.zfname);
+                $("#querenTime").html(data.starttime);
+                $("#zfTime").html(data.starttime);
+                $("#beizhu").html(data.beizhu);
             }
         })
     }
 
     function gengduo(id){
-        var url='/page/togengduo';
+        var url='/page/toliushuigengduo';
         bootbox.dialog({
             title: '更多信息',
             message: createAddContent(url),
             size: 'large',
             buttons: {
                 cancel: {
-                    label: "关闭",
+                    label: "收起",
                     className: 'btn-danger',
                     callback: function(){
                         console.log('Custom cancel clicked');
-                    }
-                },
-                ok: {
-                    label: "确认收款",
-                    className: 'btn-info',
-                    callback: function(){
-                        openshoukuan(id);
                     }
                 }
             }

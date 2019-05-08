@@ -32,6 +32,12 @@ public class MoneyController {
         return moneyService.queryshouzhangById(id);
     }
 
+    @RequestMapping("queryliushuiById")
+    @ResponseBody
+    public HashMap<String, Object> queryliushuiById(Integer id) {
+        return moneyService.queryliushuiById(id);
+    }
+
     @RequestMapping("addshouzhiliushui")
     @ResponseBody
     public Boolean addshouzhiliushui(Tenant tenant) {

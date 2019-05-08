@@ -30,4 +30,11 @@ public interface MoneyDao {
     @Select("select * from t_zdtype")
     List<ZdType> findzdtype();
 
+    @Select("    select t.*, zt.name as zdname,zf.name as zfname,zk.name as zkname,zk.fhao as fhname from  t_tenant t\n" +
+            "       LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id\n" +
+            "       LEFT JOIN t_zftype zf ON  t.zftype =zf.id\n" +
+            "       LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id\n" +
+            "       LEFT JOIN t_zhuke zk ON  t.houseid =zk.id\n" +
+            "       where t.id=#{id}")
+    HashMap<String, Object> queryliushuiById(Integer id);
 }
