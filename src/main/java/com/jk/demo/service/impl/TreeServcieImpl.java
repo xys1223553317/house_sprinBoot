@@ -5,6 +5,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.jk.demo.dao.RegDao;
 import com.jk.demo.pojo.LoginBean;
 import com.jk.demo.pojo.NavBean;
 import com.jk.demo.service.TreeServcie;
@@ -27,6 +28,9 @@ import java.util.concurrent.TimeUnit;
 public class TreeServcieImpl implements TreeServcie {
     @Reference
     private TreeService1 treeService1;
+
+    @Autowired
+    private RegDao regDao;
     @Autowired
     private RedisTemplate redisTemplate;
     @Override
@@ -97,4 +101,16 @@ public class TreeServcieImpl implements TreeServcie {
         session.setAttribute("user",stringObjectHashMap);
         return stringObjectHashMap;
     }
+
+    @Override
+    public Boolean reg(LoginBean loginBean) {
+        int count = regDao.findCount(loginBean.getAccount());
+        if (count > 0) {
+            return false;
+        }else {
+            regDao.saveUser(loginBean);
+            return true;
+        }
+    }
+
 }

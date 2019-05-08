@@ -90,15 +90,23 @@ public class PageController {
 
     @RequestMapping("findList")
     public String findList(){
+
         return "jobList";
     }
 
     @RequestMapping("zhifu")
     public String  zhifu(){
+
         return "zhifu";
     }
     @RequestMapping("openlandlord")
     public String openlandlord(){
+
         return "openlandlord";
+    }
+
+    @RequestMapping("reg")
+    public String reg() {
+        return "reg";
     }
 }

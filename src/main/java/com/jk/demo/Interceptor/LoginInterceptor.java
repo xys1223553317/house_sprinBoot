@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(request.getRequestURI().equals("/page/toLogin")||request.getRequestURI().equals("/page/phoneLogin")||request.getRequestURI().equals("/tree/sendCode")||request.getRequestURI().equals("/tree/noteLogin")||request.getRequestURI().equals("/tree/login"))
+        if(request.getRequestURI().equals("/page/toLogin")||request.getRequestURI().equals("/page/phoneLogin")||request.getRequestURI().equals("/tree/sendCode")||request.getRequestURI().equals("/tree/noteLogin")||
+                request.getRequestURI().equals("/tree/login")||request.getRequestURI().equals("/tree/reg")||request.getRequestURI().equals("/page/reg"))
         {
             return true;
         }

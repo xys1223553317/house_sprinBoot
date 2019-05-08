@@ -2,6 +2,7 @@ package com.jk.demo.controller;
 
 import com.jk.demo.pojo.LoginBean;
 import com.jk.demo.pojo.NavBean;
+import com.jk.demo.pojo.UserBean;
 import com.jk.demo.service.TreeServcie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,5 +44,20 @@ public class TreeConroller {
     public HashMap<String,Object> noteLogin(String code ,String account, HttpSession session){
         return treeServcie.noteLogin(code,account,session);
     }
+
+
+
+    @RequestMapping("reg")
+    @ResponseBody
+    public Boolean reg(LoginBean loginBean){
+        try {
+            return  treeServcie.reg(loginBean);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return   false;
+        }
+
+    }
+
 
 }

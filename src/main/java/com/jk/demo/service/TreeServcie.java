@@ -17,4 +17,6 @@ public interface TreeServcie {
     HashMap<String, Object> sendCode( HttpSession session,String account);
 
     HashMap<String, Object> noteLogin(String code, String account, HttpSession session);
+
+    Boolean reg(LoginBean loginBean);
 }

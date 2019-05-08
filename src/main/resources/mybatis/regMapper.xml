@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.demo.dao.RegDao">
+    <insert id="saveUser" parameterType="com.jk.demo.pojo.LoginBean">
+        insert into t_login (account,password) values (#{account},#{password})
+    </insert>
+    
+    <select id="findCount" parameterType="String" resultType="int">
+
+        select count(1) from t_login where account=#{value}
+    </select>
+</mapper>
