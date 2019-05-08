@@ -2,7 +2,7 @@ spring:
   datasource:
     name: mysql
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/qsy
+    url: jdbc:mysql://192.168.1.115:3306/cyy5?useUnicode=true&characterEncoding=utf8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -13,7 +13,7 @@ spring:
     application:
       name: login_consumer
     registry:
-      address: zookeeper://127.0.0.1:2181
+      address: zookeeper://192.168.1.115:2181
     scan: com.jk.xys.service
 
 
@@ -24,7 +24,7 @@ mybatis:
   mapperLocations: classpath*:mybatis/*Mapper.xml
 
   redis:
-     host=192.168.149.1
+     host=192.168.1.115
      port=6379
      pass=
      maxIdle=300
