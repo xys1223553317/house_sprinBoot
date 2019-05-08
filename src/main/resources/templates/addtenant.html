@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>租客入住</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <form id="bookForm" class="form-horizontal">
+        <input type="hidden"   name="id" >
+
+        <div class="form-group">
+            <label for="tenantName" class="col-sm-2 control-label">租客名字</label>
+            <div class="col-sm-4">
+                <input type="text" id="tenantName" name="tenantName" class="form-control">
+            </div>
+
+            <label for="phone" class="col-sm-2 control-label">联系人</label>
+            <div class="col-sm-4">
+                <input type="text" id="phone" name="phone" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="idName" class="col-sm-2 control-label">身份证号码</label>
+            <div class="col-sm-10">
+                <input type="text" id="idName" name="idName" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="urgencyPhone" class="col-sm-2 control-label">紧急联系人</label>
+            <div class="col-sm-10">
+                <input type="text" id="urgencyPhone" name="urgencyPhone" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="urPhone" class="col-sm-2 control-label">联系电话</label>
+            <div class="col-sm-10">
+                <input type="text" id="urPhone" name="urPhone" class="form-control">
+            </div>
+        </div>
+    </form>
+    <center><a type="button" onclick="addBook()" class="btn btn-info">下一步</a></center>
+</div>
+
+</body>
+
+<script type="text/javascript" th:inline="none">
+
+    function addBook() {
+        $.ajax({
+            url: "/saveHouse",
+            type: "post",
+            data: $("#bookForm").serialize(),
+            success: function (data) {
+                if (data) {
+                    alert("进行下一步")
+
+                } else {
+                   alert("失败重试")
+                }
+            }
+        })
+    }
+
+
+</script>
+
+</html>

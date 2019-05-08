@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>完善房源</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+    <script src="/js/uploadify/jquery.uploadify.js"></script>
+    <link rel="stylesheet" href="/js/uploadify/uploadify.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <form id="bookForm" class="form-horizontal">
+        <input type="hidden"   name="id" >
+
+        <div class="form-group">
+            <label for="name" class="col-sm-2 control-label">房源标题</label>
+            <div class="col-sm-4">
+                <input type="text" id="name" name="name" class="form-control">
+            </div>
+
+            <label for="tese" class="col-sm-2 control-label">房源特色</label>
+            <div class="col-sm-4">
+                <input type="text" id="tese" name="tese" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="staut" class="col-sm-2 control-label">房源出租方式</label>
+            <div class="col-sm-10">
+                <select  id="staut" name="staut" class="form-control">
+                    <option value="0">请选择</option>
+                    <option value="1">合租</option>
+                    <option value="2">整租</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price" class="col-sm-2 control-label">房屋价格</label>
+            <div class="col-sm-10">
+                <input type="text" id="price" name="price" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="imagea" class="col-sm-2 control-label">封面</label>
+            <div class="col-sm-10">
+            <input type="file" id="butOne" class="projectfile">
+            <input type="hidden" id="imagea" name="img" class="form-control">
+                <img src="" id="testimg" style="width: 150px;height: 150px;"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ctName" class="col-sm-2 control-label">推荐人群</label>
+            <div class="col-sm-10">
+                <input type="text" id="ctName" name="ctName" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="car" class="col-sm-2 control-label">附近公交</label>
+            <div class="col-sm-10">
+                <input type="text" id="car" name="car" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="metro" class="col-sm-2 control-label">附近地铁</label>
+            <div class="col-sm-10">
+                <input type="text" id="metro" name="metro" class="form-control">
+            </div>
+        </div>
+    </form>
+    <center><a type="button" onclick="addBook()" class="btn btn-info">完善房源你</a></center>
+</div>
+
+</body>
+
+<script type="text/javascript" th:inline="none">
+
+    function addBook() {
+        $.ajax({
+            url: "/saveHouse",
+            type: "post",
+            data: $("#bookForm").serialize(),
+            success: function (data) {
+                if (data) {
+                    alert("已完成房源保存.正在为您返回首页")
+                    window.location.href = "/page/queryHouse.do";
+                } else {
+                    alert("失败重试")
+                }
+            }
+        })
+    }
+
+    //文件域的id
+    $("#butOne").uploadify({
+        //前台请求后台的url 不可忽略的参数
+        'uploader': "../upload/upImg",
+        //插件自带 不可忽略的参数
+        'swf': "/js/uploadify/uploadify.swf",
+        //撤销按钮的图片路径
+        'cancelImg': "/js/uploadify/uploadify-cancel.png",
+        //如果为true 为自动上传 在文件后 为false 那么它就要我们自己手动点上传按钮
+        'auto': true,
+        //可以同时选择多个文件 默认为true 不可忽略
+        'multi': false,
+        //给上传按钮设置文字
+        'buttonText': "上传头像",
+        //上传后队列是否消失
+        'removeCompleted': true,
+        'removeTimeout': 1,
+        //上传文件的个数
+        'uploadLimit': 2,
+        'fileTypeExts': "*.jpg;*.jpge;*.gif;*.png",
+        'fileSizeLimit': "2MB",
+        //给div的进度条加背景 不可忽略
+        'queueID': "showBars",
+        // controller层方法中接收文件的参数名--------artImg
+        'fileObjName': "artImg",
+        //上传成功后的回调函数
+        'onUploadSuccess': function (file, data, response) {
+            $("#testimg").prop("src", data);
+            $("#imagea").val(data);
+        }
+    })
+</script>
+
+</html>

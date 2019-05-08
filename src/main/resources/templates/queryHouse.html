@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>房源信息</title>
+    <link rel="stylesheet" href="/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap3/css/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-table/bootstrap-table.css">
+    <link rel="stylesheet" href="/bootstrap/bootstrap-fileinput/css/fileinput.css">
+    <script src="/bootstrap/easyui1.5/jquery.min.js"></script>
+    <script src="/bootstrap/bootstrap3/js/bootstrap.js"></script>
+    <script src="/bootstrap/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/bootstrap/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="/bootstrap/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap/bootstrap-fileinput/js/locales/zh.js"></script>
+</head>
+<body>
+
+  <table id="houseTable"></table>
+</body>
+
+<script type="text/javascript" th:inline="none">
+
+
+        $("#houseTable").bootstrapTable({
+            url:'/findHouse',
+            pagination:true,
+            toolbar:'#toolbar',
+            pageList:[2,5,10,20,50],//分页组件
+            pageNumber:1,
+            pageSize:1,//默认每页条数
+            sidePagination:'server',//分页方式：client客户端分页，server服务端分页
+            queryParams:function(){
+                return{
+                    page: this.pageNumber,
+                    rows: this.pageSize,
+                }
+            },
+            columns:[
+                {checkbox:true},
+                /*{field:"id",title:"主键"},*/
+                {field : 'img',title : '房源封面',formatter : function(value,row,index) {
+                        return "<img  width='80' height='80'  src="+row.img+" />"
+                    }},
+                {field:"name",title:"房源标题"},
+                {field:"tese",title:"房源特色"},
+                {field:"tese",title:"房源出租方式",formatter:function(value,row,index){
+                    return value == 1 ?"合租" : "整租"
+                  }},
+                {field:"ctName",title:"推荐人群"},
+                {field:"car",title:"附近公交"},
+                {field:"metro",title:"附近地铁"},
+                {field:"000",title:"进屋入住",formatter:function(value,row,index){
+                        return "<a type=\'button\' onclick=\'addBook()\' class=\'btn btn-success\'" +
+                            "href='javaScript:addOne(\"+row.id+\")'>点击入住</a>"
+                    }},
+            ]
+        })
+
+    function addOne() {
+        window.location.href = "/page/show.do";
+    }
+
+</script>
+</html>
