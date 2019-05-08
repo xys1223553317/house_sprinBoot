@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/easyui1.5/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css">
+    <script src="/bootstrap3/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap-table/bootstrap-table.css">
+    <script src="/bootstrap-table/bootstrap-table.js"></script>
+
+    <script src="/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script src="/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap-fileinput/js/locales/zh.js"></script>
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.css">
+    <title>Title</title>
+</head>
+
+<body>
+<div id="toolbar">
+    <div class="form-group">
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <label>评论内容</label>
+                <input type="text" class="form-control" id="comments">
+                <label>最早时间</label>
+                <input type="text" class="form-control date" id="startTime">
+                <label>最晚时间</label>
+                <input type="text" class="form-control date" id="endTime">
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-info" onclick="serche()">搜索</button>
+</div>
+
+<div class="container-fluid" id="mydiv">
+    <table id="myTable"></table>
+</div>
+<div class="container-fluid" id="commentsTable"></div>
+</body>
+
+<script type="text/javascript">
+    $(function(){
+        initMytable();
+    })
+    function initMytable(){
+        $("#toolbar").show();
+        $("#myTable").bootstrapTable({
+            url:"/money/queryshouzhang",
+            pagination:true,
+            pageList:[5, 10, 20, 50],
+            pageNumber:1,
+            pageSize:5,
+            sidePagination:'server',
+            striped:true,
+            showColumns: true,                  //是否显示所有的列
+            showRefresh: true,
+            clickToSelect:true,
+            showToggle:true,
+            detailView: false,
+            queryParams:function(){
+                return {
+                    page: this.pageNumber,
+                    rows: this.pageSize,
+                };
+            },
+            columns:[
+              /*  {checkbox:true},
+                {field:'id',title:'ID'},*/
+                {field:'url',title:'账单房号',formatter:function(value,row,index){
+                        return value + row.fhname;
+                    }},
+                {field:'zkname',title:'付款方'},
+                {field:'money',title:'账单金额'},
+                {field:'zdname',title:'账单类型'},
+                {field:'starttime',title:'预计付款时间'},
+                {field:'111',title:'操作',formatter:function(value,row,index){
+                        return "<a href= javascript:openshoukuan('"+row.id+"');>确定收款</a>||<a href= javascript:queryzhangdan('"+row.id+"');>更多</a>"
+                    }}
+            ]
+        })
+    }
+
+    //更多
+    function queryzhangdan(id){
+        //打开更多弹框
+        gengduo(id);
+        $.ajax({
+            url:'/money/queryshouzhangById',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#fhao").html(data.url);
+                $("#fkname").html(data.zkname);
+                $("#zdmoney").html(data.money);
+                $("#zdtype").html(data.zdname);
+                $("#zdTimelong").html(data.starttime+"至"+data.endtime);
+                $("#daokuantime").html(data.starttime);
+            }
+        })
+    }
+
+    function gengduo(id){
+        var url='/page/togengduo';
+        bootbox.dialog({
+            title: '更多信息',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "确认收款",
+                    className: 'btn-info',
+                    callback: function(){
+                        openshoukuan(id);
+                    }
+                }
+            }
+        });
+    }
+
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+
+
+    function openshoukuan(id){
+        var url='/page/toquerenshoukuan?id='+id;
+        bootbox.dialog({
+            title: '确认收款',
+            message: createAddContent(url),
+            size: 'large',
+            buttons: {
+                cancel: {
+                    label: "关闭",
+                    className: 'btn-danger',
+                    callback: function(){
+                        console.log('Custom cancel clicked');
+                    }
+                },
+                ok: {
+                    label: "保存",
+                    className: 'btn-info',
+                    callback: function(){
+                        $.ajax({
+                            url:'/house/insertHouse',
+                            type:'post',
+                            data:$("#FWForm").serialize(),
+                            dataType:'json',
+                            success:function(data){
+                                if(data){
+                                    location.href.reload();
+                                }else{
+                                    alert("修改失败")
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+</html>
