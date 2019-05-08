@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("page")
 public class PageController {
 
+    //hahaah
     @RequestMapping("show")
     public  String addtenant(){
         return "addtenant";
