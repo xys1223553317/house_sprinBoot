@@ -33,6 +33,18 @@
             <if test="tenant.endtime!=null and tenant.endtime!=''">
                 and t.endtime &lt;= #{tenant.endtime,jdbcType=NUMERIC}
             </if>
+            <if test="tenant.types !=null and tenant.fs==4">
+                and zt.id= #{tenant.types}
+            </if>
+            <if test="tenant.types!=null and tenant.fs==2" >
+                and zf.id= #{tenant.types}
+            </if>
+            <if test="tenant.types!=null and tenant.fs==3">
+                and zj.id= #{tenant.types}
+            </if>
+            <if test="tenant.types!=null and tenant.fs==5">
+                and t.url like '%${tenant.types}%'
+            </if>
         </where>
     </sql>
 

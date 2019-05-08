@@ -29,6 +29,26 @@ public class Tenant {
 
     private  Integer fhorfkf;
 
+    private Integer fs;
+
+    private String  types;
+
+    public String getTypes() {
+        return types;
+    }
+
+    public void setTypes(String types) {
+        this.types = types;
+    }
+
+    public Integer getFs() {
+        return fs;
+    }
+
+    public void setFs(Integer fs) {
+        this.fs = fs;
+    }
+
     public Integer getFhorfkf() {
         return fhorfkf;
     }
