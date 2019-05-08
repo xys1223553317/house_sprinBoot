@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/easyui1.5/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap3/css/bootstrap.css">
+    <script src="/bootstrap3/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap-table/bootstrap-table.css">
+    <script src="/bootstrap-table/bootstrap-table.js"></script>
+
+    <script src="/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script src="/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="/bootbox/bootbox.all.min.js"></script>
+    <script src="/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/bootstrap-fileinput/js/locales/zh.js"></script>
+    <link rel="stylesheet" href="/bootstrap-fileinput/css/fileinput.css">
+    <title>Title</title>
+</head>
+
+<body>
+<div class="container-fluid">
+    <form id="ShoukForm" class="form-horizontal">
+        <div class="form-group">
+            <label for="money" class="col-sm-2 control-label">实付金额</label>
+            <div class="col-sm-4">
+                <input type="text" id="money" name="money" class="form-control">
+            </div>
+            <label for="priceId" class="col-sm-2 control-label">应收金额</label>
+            <div class="col-sm-4">
+                <span id="priceId"></span>
+                <input type="hidden" id="queryid" th:value="${id}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="bookType" class="col-sm-2 control-label">收款方式</label>
+            <div class="col-sm-4">
+                <select id="bookType" name="typeid" class="form-control">
+                    <option>现金</option>
+                    <option>支付宝</option>
+                    <option>微信转账</option>
+                    <option>转账</option>
+                </select>
+            </div>
+            <label for="createTimeId" class="col-sm-2 control-label">收款时间</label>
+            <div class="col-sm-4">
+                <input type="text" id="createTimeId" name="createTime" class="form-control date">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="authorId" class="col-sm-2 control-label">备注</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" rows="3" id="authorId" name="author"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+
+<script type="text/javascript">
+
+    $(function(){
+        queryById();
+    })
+    //确认收款
+    function queryById(){
+     var id=$("#queryid").val();
+        $.ajax({
+            url:'/money/queryshouzhangById',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#money").val(data.money);
+                $("#priceId").html(data.money);
+                $("#createTimeId").val(new Date().toLocaleDateString());
+            }
+        })
+    }
+
+</script>
+</html>

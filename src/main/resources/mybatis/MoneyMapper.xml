@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jk.demo.dao.MoneyDao">
+
+    <select id="queryCount" resultType="int">
+        select  count(1) from t_tenant t
+    </select>
+
+    <select id="queryshouzhang" resultType="com.jk.demo.pojo.Tenant">
+        select t.*, zt.name as zdname,zk.name as zkname,zk.fhao as fhname from  t_tenant t
+       LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
+       LEFT JOIN t_zftype zf ON  t.zftype =zf.id
+       LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id
+       LEFT JOIN t_zhuke zk ON  t.houseid =zk.id
+       LIMIT #{start},#{rows}
+    </select>
+    <!-- 新增 -->
+    <insert id="addshouzhiliushui" parameterType="com.jk.demo.pojo.Tenant">
+      insert into t_tenant(url,zjtype,money,name,sfmoney,zdtype,starttime,zftype,endtime,beizhu) values(#{url},#{zjtype},#{money},#{name},#{sfmoney},#{zdtype},#{starttime},#{zftype},#{endtime},#{beizhu})
+    </insert>
+</mapper>
