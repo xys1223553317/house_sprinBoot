@@ -24,4 +24,8 @@ public class PageController {
     public String opentenant(){
         return "opentenant";
     }
+    @RequestMapping("openlandlord")
+    public String openlandlord(){
+        return "openlandlord";
+    }
 }

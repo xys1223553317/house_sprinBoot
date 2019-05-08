@@ -15,4 +15,7 @@ public interface TenantDao {
 
     List<LandlordBean> findlandlordlist(@Param("start")int start,@Param("rows")Integer rows,@Param("landlordBean")LandlordBean landlordBean);
 
+    TenantBean cktenant(Integer id);
+
+    LandlordBean cklandlord(Integer id);
 }

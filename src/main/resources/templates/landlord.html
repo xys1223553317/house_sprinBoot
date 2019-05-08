@@ -50,6 +50,7 @@
                 };
             },
             columns: [
+                {field: 'id', title: 'ID'},
                 {field: 'name', title: '业务姓名'},
                 {field: 'url', title: '房源地址'},
                 {field: 'starttime', title: '合同开始时间'},
@@ -60,9 +61,60 @@
                  }},
                 {
                     field: 'abc', title: '操作', formatter: function (value, row, index) {
-                        return "<a href= javascript:examineparticulars('" + row.name + "')>查看详情</a>";
+                        return "<a href='javascript:examineparticulars("+row.id+");'>查看详情</a>";
                  }},
             ],
+        })
+    }
+    var res;
+    function createAddContent(url){
+        $.ajax({
+            url:url,
+            async:false,
+            success:function(data){
+                res = data;
+            }
+        });
+        return res;
+    }
+    //打开查看详情弹框
+    function chakanlandlord(){
+        var url="/page/openlandlord";
+        bootbox.dialog({
+            message:createAddContent(url),
+            size:'large',
+            buttons:{
+                cancel:{
+                    label:"收起",
+                    className:'btn-danger',
+                    callback:function(){
+                        console.log("Custom cancel clicked");
+                    }
+                }
+            }
+        })
+    }
+    function examineparticulars(id) {
+        chakanlandlord();
+        $.ajax({
+            url:"/tenant/cklandlord",
+            type:'post',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#landlordid").val(data.id);
+                $("#landlordname").val(data.name);
+                $("#landlordphone").val(data.phone);
+                $("#landlordidentity").val(data.identity);
+                $("#landlordurgencyphone").val(data.urgencyphone);
+                $("#landlordphones").val(data.phones);
+                $("#landlordurl").val(data.url);
+                $("#landlordfymji").val(data.fymji);
+                $("#landlordfyhxing").val(data.fyhxing);
+                $("#landlordfyzk").val(data.fyzk);
+            }
         })
     }
 </script>

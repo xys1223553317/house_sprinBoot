@@ -35,4 +35,14 @@ public class TenantServiceImpl implements TenantService {
         hashMap.put("rows", findlandlord);
         return hashMap;
     }
+
+    @Override
+    public TenantBean cktenant(Integer id) {
+        return tenantDao.cktenant(id);
+    }
+
+    @Override
+    public LandlordBean cklandlord(Integer id) {
+        return tenantDao.cklandlord(id);
+    }
 }

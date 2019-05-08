@@ -44,12 +44,15 @@
            showToggle:true,
            detailView: false,
            queryParams:function(){
+               var tenantName=$("#tenantName").val();
                return {
                    page: this.pageNumber,
                    rows: this.pageSize,
+                   name:tenantName
                };
            },
            columns:[
+               {field:'id',title:'ID'},
                {field:'name',title:'租客姓名'},
                {field:'url',title:'房源地址'},
                {field:'fhao',title:'房号'},
@@ -59,7 +62,7 @@
                      return  value==1?"正常":value==2?"已过期":value==3?"待完善":value==0?"整租":"";
                }},
                {field:'abc',title:'操作',formatter:function(value,row,index){
-                       return  "<a href= javascript:examineparticulars('"+row.name+"')>查看详情</a>";
+                       return  "<a href='javascript:examineparticulars("+row.id+");'>查看详情</a>";
                 }},
            ],
        })
@@ -76,7 +79,30 @@
         });
         return res;
     }
-    function examineparticulars(name){
+    function examineparticulars(id) {
+        chakantenant();
+        $.ajax({
+            url:"/tenant/cktenant",
+            type:'post',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#tenantid").val(data.id);
+                $("#tenantname").val(data.name);
+                $("#tenantphone").val(data.phone);
+                $("#tenantidentity").val(data.identity);
+                $("#tenanturgencyphone").val(data.urgencyphone);
+                $("#tenantphones").val(data.phones);
+                $("#tenantfhao").val(data.fhao);
+                $("#tenantstarttime").val(data.starttime);
+                $("#tenantendtime").val(data.endtime);
+            }
+        })
+    }
+    //打开查看详情弹框
+    function chakantenant(){
         var url="/page/opentenant";
         bootbox.dialog({
             message:createAddContent(url),

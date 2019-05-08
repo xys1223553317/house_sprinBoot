@@ -2,18 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.demo.dao.TenantDao">
+    <!-- 租客-->
 <select id="findtenantcount" parameterType="com.jk.demo.pojo.TenantBean" resultType="int">
      select count(1) from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
 </select>
 <select id="findtenantlist" parameterType="com.jk.demo.pojo.TenantBean" resultType="com.jk.demo.pojo.TenantBean">
-      select t2.name,t2.fhao,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+      select t2.id,t2.name,t2.fhao,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
       LIMIT #{start},#{rows}
 </select>
+    <!-- 房东-->
 <select id="findlandlordcount" parameterType="com.jk.demo.pojo.LandlordBean" resultType="int">
      select count(1) from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
 </select>
 <select id="findlandlordlist" parameterType="com.jk.demo.pojo.LandlordBean" resultType="com.jk.demo.pojo.LandlordBean">
-select t1.name,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
+select t1.id,t1.name,t1.starttime,t1.endtime,t1.status,t1.url from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id
 LIMIT #{start},#{rows}
+</select>
+    <!-- 租客查看详情-->
+<select id="cktenant" parameterType="int" resultType="com.jk.demo.pojo.TenantBean">
+ select t2.`name`,t2.identity,t2.phone,t2.urgencyphone,t2.phones,t2.fhao,t1.starttime,t1.endtime from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id where t1.id = #{value}
+</select>
+    <!-- 租客查看详情-->
+<select id="cklandlord" parameterType="int" resultType="com.jk.demo.pojo.LandlordBean">
+select t1.`name`,t1.phone,t1.identity,t1.urgencyphone,t1.phones,t1.url,t1.fymji,t1.fyhxing,t1.fyzk from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id where t1.id = #{value}
 </select>
 </mapper>
