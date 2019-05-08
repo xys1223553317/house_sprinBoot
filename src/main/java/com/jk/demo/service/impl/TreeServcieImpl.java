@@ -47,15 +47,13 @@ public class TreeServcieImpl implements TreeServcie {
     public HashMap<String, Object> sendCode(HttpSession session,String account) {
         HashMap<String, Object> result = new HashMap<>();
         HashMap<String, Object> params = new HashMap<>();
-      /*  redisTemplate.opsForValue().set(ConstanConf.Time,account+UUID.randomUUID().toString(),1,TimeUnit.DAYS);
+       redisTemplate.opsForValue().set(ConstanConf.Time,account+UUID.randomUUID().toString(),1,TimeUnit.DAYS);
         Object days =  redisTemplate.opsForValue().get(ConstanConf.Time);
-        ArrayList<Object> objects = new ArrayList<>();
-        objects.add(days);
-        if (objects.size()>3){
+        if (days.toString().length()>3){
             result.put("code", 3);
             result.put("msg","请在明天发送");
             return result;
-        }*/
+        }
         Object object = redisTemplate.opsForValue().get(ConstanConf.SMS_LOHIN_CODE+"sss");
         if (object!=null) {
             result.put("code", 2);
