@@ -91,7 +91,7 @@ public class TreeServcieImpl implements TreeServcie {
         Object sss = session.getAttribute("sss");
         redisTemplate.opsForValue().set(sss,sss);
         HashMap<String, Object> stringObjectHashMap = treeService1.noteLogin(code, account);
-        session.setAttribute("login",stringObjectHashMap);
+        session.setAttribute("user",stringObjectHashMap);
         return stringObjectHashMap;
     }
 }
