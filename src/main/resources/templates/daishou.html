@@ -25,17 +25,19 @@
 <body>
 <div id="toolbar">
     <div class="form-group">
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <label>评论内容</label>
-                <input type="text" class="form-control" id="comments">
-                <label>最早时间</label>
-                <input type="text" class="form-control date" id="startTime">
-                <label>最晚时间</label>
-                <input type="text" class="form-control date" id="endTime">
-            </div>
+        <label class="col-sm-2 control-label">待收总额</label>
+        <div class="col-sm-4">
+            <span id="dsze"></span>
         </div>
+            <div class="col-sm-2" style="margin-left: 300px">
+                <select id="bookType"  class="form-control">
+                    <option value="1" name="fhorfkf">账单房号</option>
+                    <option value="2" name="fhorfkf">付款方</option>
+                </select>
+                <input type="text" id="fhorfkfx"  class="form-control">
+            </div>
     </div>
+
     <button type="button" class="btn btn-info" onclick="serche()">搜索</button>
 </div>
 
@@ -49,6 +51,11 @@
     $(function(){
         initMytable();
     })
+
+    //搜索
+    function serche(){
+        $('#myTable').bootstrapTable('refresh');
+    }
     function initMytable(){
         $("#toolbar").show();
         $("#myTable").bootstrapTable({
@@ -65,9 +72,13 @@
             showToggle:true,
             detailView: false,
             queryParams:function(){
+                var fhorfkf=$("#fhorfkfx").val();
+                var fhff=$("*[name='fhorfkf']:checked").val();
                 return {
                     page: this.pageNumber,
                     rows: this.pageSize,
+                    fhorfkfId:fhff,
+                    name: fhorfkf
                 };
             },
             columns:[

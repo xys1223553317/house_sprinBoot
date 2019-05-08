@@ -3,18 +3,78 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jk.demo.dao.MoneyDao">
 
-    <select id="queryCount" resultType="int">
+    <!--查询收支流水条数-->
+    <select id="queryliushuiCount" resultType="int">
         select  count(1) from t_tenant t
+        LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
+        LEFT JOIN t_zftype zf ON  t.zftype =zf.id
+        LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id
+        LEFT JOIN t_zhuke zk ON  t.houseid =zk.id
+        <include refid="liushuiWhere"></include>
     </select>
 
+    <!-- 分页查询收支流水信息-->
+    <select id="queryshouzhiliushui" resultType="com.jk.demo.pojo.Tenant">
+        select t.*, zt.name as zdname,zk.name as zkname,zf.name as zfname,zk.fhao as fhname from  t_tenant t
+        LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
+        LEFT JOIN t_zftype zf ON  t.zftype =zf.id
+        LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id
+        LEFT JOIN t_zhuke zk ON  t.houseid =zk.id
+        <include refid="liushuiWhere"></include>
+        LIMIT #{start},#{rows}
+    </select>
+
+
+    <sql id="liushuiWhere">
+        <where>
+            <if test="tenant.starttime!=null and tenant.starttime!=''">
+                and t.starttime >= #{tenant.starttime,jdbcType=NUMERIC}
+            </if>
+            <if test="tenant.endtime!=null and tenant.endtime!=''">
+                and t.endtime &lt;= #{tenant.endtime,jdbcType=NUMERIC}
+            </if>
+        </where>
+    </sql>
+
+    <!--查询条数-->
+    <select id="queryCount" resultType="int">
+        select  count(1) from t_tenant t
+        LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
+        LEFT JOIN t_zftype zf ON  t.zftype =zf.id
+        LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id
+        LEFT JOIN t_zhuke zk ON  t.houseid =zk.id
+        <include refid="fhfkWhere"></include>
+    </select>
+
+   <!-- 分页查询收账信息-->
     <select id="queryshouzhang" resultType="com.jk.demo.pojo.Tenant">
         select t.*, zt.name as zdname,zk.name as zkname,zf.name as zfname,zk.fhao as fhname from  t_tenant t
        LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id
        LEFT JOIN t_zftype zf ON  t.zftype =zf.id
        LEFT JOIN t_zjtype zj ON  t.zjtype =zj.id
        LEFT JOIN t_zhuke zk ON  t.houseid =zk.id
+       <include refid="fhfkWhere"></include>
        LIMIT #{start},#{rows}
     </select>
+
+    <!--条查-->
+    <sql id="fhfkWhere">
+        <where>
+            <if test="fhorfkf !=null and fhorfkf!= '' and fhorfkfId !=null and fhorfkfId ==1 ">
+                and t.url like '%${fhorfkf}%'
+            </if>
+            <if test="fhorfkf !=null and fhorfkf!= '' and fhorfkfId !=null and fhorfkfId ==2 ">
+                and zk.name like '%${fhorfkf}%'
+            </if>
+            <if test="fhorfkf !=null and fhorfkf!= '' and fhorfkfId !=null and fhorfkfId ==3 ">
+                and t.url like '%${fhorfkf}%'
+            </if>
+            <if test="fhorfkf !=null and fhorfkf!= '' and fhorfkfId !=null and fhorfkfId ==4 ">
+                and t.name like '%${fhorfkf}%'
+            </if>
+        </where>
+    </sql>
+
     <!-- 新增 -->
     <insert id="addshouzhiliushui" parameterType="com.jk.demo.pojo.Tenant">
       insert into t_tenant(url,zjtype,money,name,sfmoney,zdtype,starttime,zftype,endtime,beizhu) values(#{url},#{zjtype},#{money},#{name},#{sfmoney},#{zdtype},#{starttime},#{zftype},#{endtime},#{beizhu})

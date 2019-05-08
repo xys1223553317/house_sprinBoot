@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface MoneyService {
 
-    HashMap<String, Object> queryshouzhang(Integer page, Integer rows);
+    HashMap<String, Object> queryshouzhang(Integer page, Integer rows,String fhorfkf,Integer fhorfkfId);
 
 
     HashMap<String, Object> queryshouzhangById(Integer id);
@@ -25,4 +25,6 @@ public interface MoneyService {
     List<ZdType> findzdtype();
 
     HashMap<String, Object> queryliushuiById(Integer id);
+
+    HashMap<String, Object> queryshouzhiliushui(Integer page, Integer rows,Tenant tenant);
 }

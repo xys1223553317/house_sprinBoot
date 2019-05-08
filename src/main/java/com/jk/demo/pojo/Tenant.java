@@ -27,6 +27,15 @@ public class Tenant {
     private  Integer zftype;//支付类型
     private  String zfname;
 
+    private  Integer fhorfkf;
+
+    public Integer getFhorfkf() {
+        return fhorfkf;
+    }
+
+    public void setFhorfkf(Integer fhorfkf) {
+        this.fhorfkf = fhorfkf;
+    }
 
     public Integer getSfmoney() {
         return sfmoney;

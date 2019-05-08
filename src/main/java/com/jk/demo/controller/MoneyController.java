@@ -22,9 +22,18 @@ public class MoneyController {
 
     @RequestMapping("queryshouzhang")
     @ResponseBody
-    public HashMap<String, Object> queryshouzhang(Integer page, Integer rows) {
-        return moneyService.queryshouzhang(page, rows);
+    public HashMap<String, Object> queryshouzhang(Integer page, Integer rows,String name,Integer fhorfkfId) {
+        return moneyService.queryshouzhang(page, rows,name,fhorfkfId);
     }
+
+    //查看收支流水
+    @RequestMapping("queryshouzhiliushui")
+    @ResponseBody
+    public HashMap<String, Object> queryshouzhiliushui(Integer page, Integer rows,Tenant tenant) {
+        return moneyService.queryshouzhiliushui(page, rows,tenant);
+    }
+
+
 
     @RequestMapping("queryshouzhangById")
     @ResponseBody

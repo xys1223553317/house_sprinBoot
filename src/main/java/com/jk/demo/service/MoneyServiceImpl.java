@@ -19,18 +19,31 @@ public class MoneyServiceImpl implements MoneyService {
     @Autowired
     private MoneyDao moneyDao;
 
+    //查看收账支账
     @Override
-    public HashMap<String, Object> queryshouzhang(Integer page, Integer rows) {
+    public HashMap<String, Object> queryshouzhang(Integer page, Integer rows,String fhorfkf,Integer fhorfkfId) {
         HashMap<String, Object> hashMap = new HashMap<>();
 
-        int total=moneyDao.queryCount();
+        int total=moneyDao.queryCount(fhorfkf,fhorfkfId);
         int start=(page-1)*rows;
-        List<Tenant> queryGoods = moneyDao.queryshouzhang(start,rows);
+        List<Tenant> queryGoods = moneyDao.queryshouzhang(start,rows,fhorfkf,fhorfkfId);
         hashMap.put("total", total);
         hashMap.put("rows", queryGoods);
         return hashMap;
     }
 
+   //查看收支流水
+    @Override
+    public HashMap<String, Object> queryshouzhiliushui(Integer page, Integer rows,Tenant tenant) {
+        HashMap<String, Object> hashMap = new HashMap<>();
+
+        int total=moneyDao.queryliushuiCount(tenant);
+        int start=(page-1)*rows;
+        List<Tenant> queryGoods = moneyDao.queryshouzhiliushui(start,rows,tenant);
+        hashMap.put("total", total);
+        hashMap.put("rows", queryGoods);
+        return hashMap;
+    }
     @Override
     public HashMap<String, Object> queryshouzhangById(Integer id) {
 
@@ -42,7 +55,9 @@ public class MoneyServiceImpl implements MoneyService {
         return moneyDao.queryliushuiById(id);
     }
 
-   @Override
+
+
+    @Override
     public void addshouzhiliushui(Tenant tenant) {
         moneyDao.addshouzhiliushui(tenant);
     }

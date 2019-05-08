@@ -24,25 +24,68 @@
 
 <body>
 <div id="toolbar">
-    <div class="form-group">
-        <div class="container-fluid">
-            <div class="col-md-12">
-                <label>评论内容</label>
-                <input type="text" class="form-control" id="comments">
-                <label>最早时间</label>
-                <input type="text" class="form-control date" id="startTime">
-                <label>最晚时间</label>
-                <input type="text" class="form-control date" id="endTime">
-            </div>
+    <div class="row">
+        <div class="col-md-2">
+       <!--     <label>待收总额</label>
+            <div class="col-sm-4">
+                <span id="dsze1"></span>
+            </div>-->
+        </div>
+        <div class="col-md-2">
+            <select id="bookType1"  class="form-control">
+                <option value="1" name="fhorfkf">账单房号</option>
+                <option value="2" name="fhorfkf">付款方</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <select id="bookType2"  class="form-control">
+                <option value="1" name="fhorfkf">账单房号</option>
+                <option value="2" name="fhorfkf">付款方</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="text" id="starttime" name="starttime" class="form-control date" placeholder="选择开始时间">
+        </div>
+        <div class="col-md-2">
+                <input type="text" id="endtime" name="endtime" class="form-control date" placeholder="选择结束时间">
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="serche()">搜索</button>
         </div>
     </div>
-    <button type="button" class="btn btn-info" onclick="serche()">搜索</button>
-    <button type="button" class="btn btn-info" onclick="addliushui()">添加流水</button>
+    <div class="row">
+        <div class="col-md-1">
+             <label>收入</label>
+             <div class="col-sm-4">
+                 <span id="sr"></span>
+             </div>
+        </div>
+        <div class="col-md-1">
+            <label>支出</label>
+            <div class="col-sm-4">
+                <span id="zc"></span>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <label>利润</label>
+            <div class="col-sm-4">
+                <span id="lr"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info" onclick="addliushui()">添加流水</button>
+        </div>
+    </div>
 </div>
 
-<div class="container-fluid" id="mydiv">
-    <table id="myTable"></table>
-</div>
+    <div class="container-fluid" id="mydiv">
+        <table id="myTable"></table>
+    </div>
+
 <div class="container-fluid" id="commentsTable"></div>
 </body>
 
@@ -50,10 +93,15 @@
     $(function(){
         initMytable();
     })
+
+    //搜索
+    function serche(){
+        $('#myTable').bootstrapTable('refresh');
+    }
     function initMytable(){
+        $("#toolbar").show();
         $("#myTable").bootstrapTable({
-            url:"/money/queryshouzhang",
-            toolbar:'#toolbar',
+            url:"/money/queryshouzhiliushui",
             pagination:true,
             pageList:[5, 10, 20, 50],
             pageNumber:1,
@@ -66,9 +114,13 @@
             showToggle:true,
             detailView: false,
             queryParams:function(){
+                var starttime=$("#starttime").val();
+                var endtime=$("#endtime").val();
                 return {
                     page: this.pageNumber,
                     rows: this.pageSize,
+                    starttime:starttime,
+                    endtime:endtime
                 };
             },
             columns:[
@@ -188,5 +240,14 @@
         });
         return res;
     }
+    /* 时间 */
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
 </script>
 </html>

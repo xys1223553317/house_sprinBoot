@@ -12,9 +12,9 @@ import java.util.List;
 
 public interface MoneyDao {
 
-    int queryCount();
+    int queryCount(@Param("fhorfkf") String fhorfkf,@Param("fhorfkfId")Integer fhorfkfId);
 
-    List<Tenant> queryshouzhang(@Param("start") int start, @Param("rows") Integer rows);
+    List<Tenant> queryshouzhang(@Param("start") int start, @Param("rows") Integer rows,@Param("fhorfkf") String fhorfkf,@Param("fhorfkfId")Integer fhorfkfId);
 
     @Select("select t.*, zt.name as zdname,zk.name as zkname,zk.fhao as fhname from t_tenant t LEFT JOIN t_zdtype zt ON  t.zdtype =zt.id LEFT JOIN t_zhuke zk ON  t.houseid =zk.id where t.id= #{id}")
     HashMap<String, Object> queryshouzhangById(Integer id);
@@ -37,4 +37,9 @@ public interface MoneyDao {
             "       LEFT JOIN t_zhuke zk ON  t.houseid =zk.id\n" +
             "       where t.id=#{id}")
     HashMap<String, Object> queryliushuiById(Integer id);
+
+
+    int queryliushuiCount(@Param("tenant")Tenant tenant);
+
+    List<Tenant> queryshouzhiliushui(@Param("start")int start,@Param("rows") Integer rows,@Param("tenant")Tenant tenant);
 }
