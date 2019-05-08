@@ -27,4 +27,16 @@ public class TenantController {
     public HashMap<String,Object> findlandlordlist(Integer page, Integer rows,LandlordBean landlordBean){
        return tenantService.findlandlordlist(page,rows,landlordBean);
     }
+    //查看详情租客
+    @RequestMapping("cktenant")
+    @ResponseBody
+    public TenantBean cktenant(Integer id){
+        return tenantService.cktenant(id);
+    }
+    //查看详情房东
+    @RequestMapping("cklandlord")
+    @ResponseBody
+    public LandlordBean cklandlord(Integer id){
+        return tenantService.cklandlord(id);
+    }
 }

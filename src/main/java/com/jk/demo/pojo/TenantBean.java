@@ -22,5 +22,5 @@ public class TenantBean {
     private Integer phone;
     private Integer identity;
     private Integer phones;
-    private Integer urgencyphone;
+    private String urgencyphone;
 }

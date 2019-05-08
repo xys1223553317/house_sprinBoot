@@ -18,4 +18,11 @@ public class LandlordBean {
     @JsonFormat(pattern="yyyy-MM-dd",timezone="GMT+8")
     private Date endtime;
     private Integer status;
+    private Integer phone;
+    private Integer identity;
+    private Integer phones;
+    private String urgencyphone;
+    private Integer fymji;
+    private String fyhxing;
+    private String fyzk;
 }

@@ -97,4 +97,8 @@ public class PageController {
     public String  zhifu(){
         return "zhifu";
     }
+    @RequestMapping("openlandlord")
+    public String openlandlord(){
+        return "openlandlord";
+    }
 }
