@@ -1,7 +1,7 @@
 package com.jk.demo.dao;
 
-import com.jk.demo.bean.LandlordBean;
-import com.jk.demo.bean.TenantBean;
+import com.jk.demo.pojo.LandlordBean;
+import com.jk.demo.pojo.TenantBean;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.jk.demo.controller;
 
-import com.jk.demo.bean.LandlordBean;
-import com.jk.demo.bean.TenantBean;
+import com.jk.demo.pojo.LandlordBean;
+import com.jk.demo.pojo.TenantBean;
 import com.jk.demo.service.TenantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
