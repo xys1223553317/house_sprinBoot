@@ -104,6 +104,10 @@ public class PageController {
 
         return "openlandlord";
     }
+    @RequestMapping("addlandlord")
+    public String addlandlord(){
+        return "addlandlord";
+    }
 
     @RequestMapping("reg")
     public String reg() {

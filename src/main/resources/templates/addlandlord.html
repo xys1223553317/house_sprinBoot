@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/js/easyui1.5/jquery.min.js"></script>
+    <link rel="stylesheet" href="/js/bootstrap3/css/bootstrap.css">
+    <script src="/js/bootstrap3/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" href="/js/bootstrap-table/bootstrap-table.css">
+    <script src="/js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="/js/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <link rel="stylesheet" href="/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css">
+    <script src="/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+
+    <script src="/js/bootbox/bootbox.all.min.js"></script>
+
+    <script src="/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/js/bootstrap-fileinput/js/locales/zh.js"></script>
+    <link rel="stylesheet" href="/js/bootstrap-fileinput/css/fileinput.css">
+    <link rel="stylesheet" href="/js/bootstrap-fileinput/css/fileinput.css">
+    <script src="/js/bootstrap-fileinput/js/fileinput.js"></script>
+    <script src="/js/bootstrap-fileinput/js/locales/zh.js"></script>
+    <title>Title</title>
+</head>
+<h3>合同信息</h3><br>
+<div class="container-fluid">
+    <form class="form-horizontal" id="landlordForm">
+        <div class="form-group">
+            <label for="landlordcontractway" class="col-sm-2 control-label">合同方式:</label>
+            <div class="col-sm-4">
+                <input type="hidden" class="form-control" id="landlordid" name="id">
+               <input type="text" class="form-control" id="landlordcontractway" name="contractway">
+            </div>
+            <label for="landlordstarttime" class="col-sm-2 control-label">开始时间:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control date" id="landlordstarttime" name="starttime">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="landlordendtime" class="col-sm-2 control-label">结束时间:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control date" id="landlordendtime" name="endtime">
+            </div>
+            <label for="landlordfzzhifu" class="col-sm-2 control-label">房租支付方式:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="landlordfzzhifu" name="fzzhifu">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="landlordrent" class="col-sm-2 control-label">房屋租金:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="landlordrent" name="rent">
+            </div>
+            <label for="landlordcash" class="col-sm-2 control-label">房屋押金:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="landlordcash" name="cash">
+            </div>
+        </div>
+    </form>
+</div>
+<body>
+<script type="text/javascript">
+    $('.date').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd hh:ii:ss',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),//初始化当前日期
+        autoclose: true,//选中自动关闭
+        todayBtn: true//显示今日按钮
+    });
+</script>
+</body>
+</html>

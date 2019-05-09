@@ -58,10 +58,18 @@
                 {
                     field: 'status', title: '状态', formatter: function (value, row, index) {
                         return value == 1 ? "正常" : value == 2 ? "已过期" : value == 3 ? "待完善" : "";
+
                  }},
                 {
                     field: 'abc', title: '操作', formatter: function (value, row, index) {
-                        return "<a href='javascript:examineparticulars("+row.id+");'>查看详情</a>";
+                        var str="";
+                        if (row.status==3){
+                             str="<a href='javascript:perfectparticulars("+row.id+");'>完善详情</a>";
+                        }
+                        if (row.status!=3){
+                             str="<a href='javascript:examineparticulars("+row.id+");'>查看详情</a>";
+                        }
+                        return str;
                  }},
             ],
         })
@@ -115,6 +123,79 @@
                 $("#landlordfymji").val(data.fymji);
                 $("#landlordfyhxing").val(data.fyhxing);
                 $("#landlordfyzk").val(data.fyzk);
+                $("#landlordstarttime").val(data.starttime);
+                $("#landlordendtime").val(data.endtime);
+                $("#landlordrent").val(data.rent);
+                $("#landlordcash").val(data.cash);
+                $("#landlordzxvacancy").val(data.zxvacancy);
+                $("#landlordrentholiday").val(data.rentholiday);
+                $("#landlordfzzhifu").val(data.fzzhifu);
+                $("#landlordsbiaonumber").val(data.sbiaonumber);
+                $("#landlorddbiaonumber").val(data.dbiaonumber);
+                $("#landlordqbiaonumber").val(data.qbiaonumber);
+                $("#landlordpropertyfee").val(data.propertyfee);
+            }
+        })
+    }
+    //打开合同信息修改弹框
+    function openparticulars(){
+        var url="/page/addlandlord";
+        bootbox.dialog({
+            message:createAddContent(url),
+            size:'large',
+            buttons:{
+                cancel:{
+                    label:"取消",
+                    className:'btn-danger',
+                    callback:function(){
+                        console.log("Custom cancel clicked");
+                    }
+                },
+                ok:{
+                    label:"确定",
+                    className:'btn-info',
+                    callback:function(){
+                        $.ajax({
+                            url:'/tenant/updatelandlordlist',
+                            type:'post',
+                            data:$("#landlordForm").serialize(),
+                            dataType:'json',
+                            success:function(data){
+                                if(data){
+                                    alert("修改成功");
+                                    $("#myTable").bootstrapTable('refresh');
+                                }else{
+                                    bootbox.alert({
+                                        size:"small",
+                                        title:"提示",
+                                        message:"修改失败"
+                                    });
+                                }
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }
+    //合同信息回显弹框
+    function perfectparticulars(id){
+        openparticulars();
+        $.ajax({
+            url:"/tenant/huixianlandlord",
+            type:'post',
+            data:{
+                id:id
+            },
+            dataType:'json',
+            success:function(data){
+                $("#landlordid").val(data.id);
+                $("#landlordcontractway").val(data.contractway);
+                $("#landlordstarttime").val(data.starttime);
+                $("#landlordendtime").val(data.endtime);
+                $("#landlordfzzhifu").val(data.fzzhifu);
+                $("#landlordrent").val(data.rent);
+                $("#landlordcash").val(data.cash);
             }
         })
     }

@@ -24,6 +24,14 @@ LIMIT #{start},#{rows}
 </select>
     <!-- 房东查看详情-->
 <select id="cklandlord" parameterType="int" resultType="com.jk.demo.pojo.LandlordBean">
-select t1.`name`,t1.phone,t1.identity,t1.urgencyphone,t1.phones,t1.url,t1.fymji,t1.fyhxing,t1.fyzk from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id where t1.id = #{value}
+select t1.`name`,t1.phone,t1.identity,t1.urgencyphone,t1.phones,t1.url,t1.fymji,t1.fyhxing,t1.fyzk,t1.starttime,t1.endtime,t1.rent,t1.cash,t1.zxvacancy,t1.rentholiday,t1.fzzhifu,t1.sbiaonumber,t1.dbiaonumber,t1.qbiaonumber,t1.propertyfee from t_tenant t1 LEFT JOIN t_zhuke t2 on t1.houseid=t2.id where t1.id = #{value}
 </select>
+    <!--房东回显合同信息-->
+<select id="huixianlandlord" parameterType="int" resultType="com.jk.demo.pojo.LandlordBean">
+select t1.id,t1.contractway,t1.starttime,t1.endtime,t1.fzzhifu,t1.rent,t1.cash  from t_tenant t1 where t1.id = #{value}
+</select>
+    <!--修改合同信息-->
+<update id="updatelandlordlist" parameterType="com.jk.demo.pojo.LandlordBean">
+update t_tenant set contractway=#{contractway},starttime=#{starttime},endtime=#{endtime},fzzhifu=#{fzzhifu},rent=#{rent},cash=#{cash} where id=#{id}
+</update>
 </mapper>

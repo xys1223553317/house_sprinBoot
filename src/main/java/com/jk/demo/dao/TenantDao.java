@@ -18,4 +18,8 @@ public interface TenantDao {
     TenantBean cktenant(Integer id);
 
     LandlordBean cklandlord(Integer id);
+
+    LandlordBean huixianlandlord(Integer id);
+
+    boolean updatelandlordlist(LandlordBean landlordBean);
 }

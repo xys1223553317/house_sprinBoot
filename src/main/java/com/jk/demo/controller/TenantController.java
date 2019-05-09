@@ -39,4 +39,16 @@ public class TenantController {
     public LandlordBean cklandlord(Integer id){
         return tenantService.cklandlord(id);
     }
+    //回显合同信息
+    @RequestMapping("huixianlandlord")
+    @ResponseBody
+    public LandlordBean huixianlandlord(Integer id){
+        return tenantService.huixianlandlord(id);
+    }
+    //修改合同信息
+    @RequestMapping("updatelandlordlist")
+    @ResponseBody
+    public boolean updatelandlordlist(LandlordBean landlordBean){
+       return tenantService.updatelandlordlist(landlordBean);
+    }
 }
